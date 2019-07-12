@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <p>Products</p>
+
+
+
+            <th scope="row"> </th>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Product Name</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for products in product %}
+                    <tr>
+                        <td> {{products.title}}</td>
+                        <td>{{products.description}}</td>
+                        <td>{{products.price}}</td>
+                        <td>{% if products.isActive %} Available {% else %}Not Available {% endif %}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}
