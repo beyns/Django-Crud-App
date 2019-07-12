@@ -1,18 +1,25 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-<div class="container">
-    <div class="row">
-        <div class="col-md-8">
-            <p>Products</p>
-
-
-
+<section class="py-6 bg-white">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-md-8">
+                <p class="subtitle text-primary">Stay and eat like a local</p>
+                <h2>Our guides</h2>
+            </div>
+            <div class="col-md-4 d-lg-flex align-items-center justify-content-end">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                    Create Product
+                </button>
+            </div>
+        </div>
+        <div class="row justify-content-center">
             <th scope="row"> </th>
             <table class="table">
                 <thead>
                     <tr>
+                        <th scope="col">#</th>
                         <th scope="col">Product Name</th>
                         <th scope="col">Description</th>
                         <th scope="col">Price</th>
@@ -22,6 +29,7 @@
                 <tbody>
                     {% for products in product %}
                     <tr>
+                        <td> {{products.id}}</td>
                         <td> {{products.title}}</td>
                         <td>{{products.description}}</td>
                         <td>{{products.price}}</td>
@@ -30,6 +38,47 @@
                     {% endfor %}
                 </tbody>
             </table>
+        </div>
+    </div>
+    </div>
+</section>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Title</label>
+                        <input type="text" name="title" class="form-control" id="exampleInputEmail1"
+                            aria-describedby="emailHelp">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Price</label>
+                        <input type="text" name="price" class="form-control" id="exampleFormControlInput1">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1">Description</label>
+                        <textarea class="form-control" name="description" id="exampleFormControlTextarea1"
+                            rows="3"></textarea>
+                    </div>
+                    <div class="form-group form-check">
+                        <input type="checkbox" value="1" name="isActive" class="form-check-input" id="exampleCheck1">
+                        <label class="form-check-label" for="exampleCheck1">isActive</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
 
         </div>
     </div>
